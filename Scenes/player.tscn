@@ -1,0 +1,251 @@
+[gd_scene load_steps=14 format=3 uid="uid://b4cd3xrws17er"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_dg5yg"]
+[ext_resource type="PackedScene" uid="uid://ddhubvqenods8" path="res://Assets/horror_game_flashlight_download_game-ready.glb" id="2_q8dts"]
+[ext_resource type="AudioStream" uid="uid://bc45odbv3xnas" path="res://Assets/playerFootstep.ogg" id="3_lvi3h"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4ebef"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uad0n"]
+size = Vector3(0.5, 1.8, 1)
+
+[sub_resource type="Animation" id="Animation_aouhw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/Flashlight:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/Flashlight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.873703, 0.242709, -0.0610594)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D/Flashlight:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.32349e-22, 1.5708, -1.5708)]
+}
+
+[sub_resource type="Animation" id="Animation_53aix"]
+resource_name = "lightDown"
+length = 0.75
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/Flashlight:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/Flashlight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.6, -0.624, -0.776), Vector3(0.6, -1, -0.061)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D/Flashlight:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0), Vector3(1.32349e-22, 1.5708, -1.5708)]
+}
+
+[sub_resource type="Animation" id="Animation_r0ayt"]
+resource_name = "lightUp"
+length = 0.75
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/Flashlight:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/Flashlight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.6, -1, -0.061), Vector3(0.6, -0.624, -0.776)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D/Flashlight:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.25, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.32349e-22, 1.5708, -1.5708), Vector3(0, 1.5708, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_de7wh"]
+_data = {
+"RESET": SubResource("Animation_aouhw"),
+"lightDown": SubResource("Animation_53aix"),
+"lightUp": SubResource("Animation_r0ayt")
+}
+
+[sub_resource type="Animation" id="Animation_kfxpn"]
+resource_name = "Footstep"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"handleFootstepAudio"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_uxhh5"]
+resource_name = "SprintFootstep"
+length = 0.3
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"handleFootstepAudio"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xgosl"]
+_data = {
+"Footstep": SubResource("Animation_kfxpn"),
+"SprintFootstep": SubResource("Animation_uxhh5")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_auklk"]
+size = Vector3(1.59, 2.235, 2.645)
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER") groups=["Player"]]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_dg5yg")
+MOUSE_SENSITIVITY = 1.0
+CAMERA_CONTROLLER = NodePath("Camera3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0094, 0)
+mesh = SubResource("CapsuleMesh_4ebef")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_uad0n")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+fov = 90.0
+
+[node name="Flashlight" parent="Camera3D" instance=ExtResource("2_q8dts")]
+transform = Transform3D(5.24173e-12, -1.448e-06, 0.4, -0.4, -1.448e-06, -5.29396e-23, 1.448e-06, -0.4, -1.448e-06, 0.873703, 0.242709, -0.0610594)
+visible = false
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D/Flashlight"]
+transform = Transform3D(-1.09278e-07, 0, -2.5, 0, 2.5, 0, 2.5, 0, -1.09278e-07, 1, 0, 0)
+light_color = Color(0.925115, 0.924626, 0.777155, 1)
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 100.0
+distance_fade_length = 50.0
+spot_range = 300.0
+spot_attenuation = 0.0
+spot_angle = 20.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_de7wh")
+}
+
+[node name="FootstepAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_lvi3h")
+volume_db = -50.0
+
+[node name="FootstepAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xgosl")
+}
+
+[node name="SprintTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="SprintRecover" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="RepairCheck" type="Area3D" parent="."]
+collision_layer = 64
+collision_mask = 128
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RepairCheck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93, -0.78)
+shape = SubResource("BoxShape3D_auklk")
+
+[connection signal="timeout" from="SprintTimer" to="." method="_on_sprint_timer_timeout"]
+[connection signal="timeout" from="SprintRecover" to="." method="_on_sprint_recover_timeout"]

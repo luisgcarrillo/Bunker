@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmb3ktx0ifpvf"]
+
+[ext_resource type="PackedScene" uid="uid://dm18nftidwc8n" path="res://zombie.glb" id="1_lpmp8"]
+[ext_resource type="Texture2D" uid="uid://dk28wx3io8y6a" path="res://new_thin_zombie.png" id="2_ga2bm"]
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="2_tvpro"]
+[ext_resource type="Script" path="res://Scripts/state_machine.gd" id="3_s41ad"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ewdvn"]
+albedo_texture = ExtResource("2_ga2bm")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hgk8c"]
+size = Vector3(3.53, 7.695, 1.51)
+
+[node name="Zombie" type="Node3D"]
+
+[node name="zombie" parent="." groups=["Enemy"] instance=ExtResource("1_lpmp8")]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("2_tvpro")
+
+[node name="Skeleton3D" parent="zombie/Armature" index="0"]
+bones/0/position = Vector3(-6.12444e-09, 4.01546, 0.0922952)
+bones/0/rotation = Quaternion(-0.0191954, -8.25863e-06, 0.000434786, 0.999816)
+bones/1/rotation = Quaternion(0.0599008, -0.000652246, 0.00341986, 0.998198)
+bones/2/rotation = Quaternion(0.0120539, -0.0263267, 0.00929577, 0.999538)
+bones/3/rotation = Quaternion(0.471698, 0.0198827, -0.0202628, 0.881303)
+bones/4/rotation = Quaternion(-0.422372, 9.15424e-08, 1.64159e-08, 0.906422)
+bones/5/rotation = Quaternion(-0.530677, -0.419644, -0.547958, 0.491958)
+bones/6/rotation = Quaternion(0.03582, 0.790505, -0.562155, 0.240418)
+bones/7/rotation = Quaternion(0.100906, 0.569758, -0.00156901, 0.815593)
+bones/8/rotation = Quaternion(-0.0444924, 0.673916, 0.0570734, 0.735255)
+bones/10/rotation = Quaternion(0.175507, -0.0127041, 0.104958, 0.978785)
+bones/11/rotation = Quaternion(-0.275173, 0.580848, 0.145256, 0.752194)
+bones/12/rotation = Quaternion(0.0444373, -0.124404, 0.293458, 0.946801)
+bones/14/rotation = Quaternion(0.0918643, -0.106998, 0.12914, 0.981547)
+bones/16/rotation = Quaternion(0.228095, -0.351956, 0.267379, 0.86753)
+bones/17/rotation = Quaternion(-0.491856, 0.461014, 0.568102, 0.47202)
+bones/18/rotation = Quaternion(-0.0818862, 0.803206, -0.582761, -0.0924388)
+bones/19/rotation = Quaternion(0.0521897, -0.423363, -0.0690924, 0.901813)
+bones/20/rotation = Quaternion(0.154934, -0.638615, 0.0424083, 0.752574)
+bones/22/rotation = Quaternion(0.224877, 0.104184, -0.187973, 0.950391)
+bones/23/rotation = Quaternion(-0.275173, -0.580848, -0.145257, 0.752194)
+bones/24/rotation = Quaternion(-0.0129983, 0.223043, -0.331815, 0.916505)
+bones/26/rotation = Quaternion(0.176053, 0.165681, -0.189617, 0.95163)
+bones/28/rotation = Quaternion(0.259228, 0.311956, -0.247858, 0.879802)
+bones/29/rotation = Quaternion(0.996552, 0.0278928, -0.0162504, 0.076431)
+bones/29/scale = Vector3(1.00002, 0.999997, 1.00002)
+bones/30/rotation = Quaternion(0.186162, 0.00973017, 0.0353733, 0.981834)
+bones/30/scale = Vector3(1, 0.999997, 0.999998)
+bones/31/rotation = Quaternion(0.976364, -0.0703798, 0.204333, -0.00269343)
+bones/31/scale = Vector3(1.00002, 0.999999, 1.00001)
+bones/32/rotation = Quaternion(0.144373, -0.00646095, -0.0613973, 0.987596)
+bones/32/scale = Vector3(1, 0.999999, 1)
+bones/33/position = Vector3(-0.39328, 0.474, -0.237019)
+bones/33/rotation = Quaternion(0.991389, 2.08117e-09, 0.130947, -2.90303e-08)
+bones/34/rotation = Quaternion(-0.388259, 0.0175303, 0.0316722, 0.920839)
+bones/35/rotation = Quaternion(0.0352234, 0.942375, -0.332594, -0.00835086)
+bones/36/rotation = Quaternion(-0.0332343, 0.962972, 0.267267, 0.0121582)
+bones/37/position = Vector3(0.419173, 0.471188, 0.118383)
+bones/37/rotation = Quaternion(0.999855, -9.91783e-10, 5.33773e-08, -0.0170264)
+bones/39/rotation = Quaternion(-0.0352234, 0.942375, -0.332594, 0.00835085)
+
+[node name="new_thin_zombie" parent="zombie/Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ewdvn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="zombie"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8258, 0)
+shape = SubResource("BoxShape3D_hgk8c")
+
+[node name="State Machine" type="Node" parent="."]
+script = ExtResource("3_s41ad")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0, 10)
+collision_mask = 3
+
+[editable path="zombie"]

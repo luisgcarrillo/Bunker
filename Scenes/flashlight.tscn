@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0ywh2rhy13rq"]
+
+[ext_resource type="PackedScene" path="res://horror_game_flashlight_download_game-ready.glb" id="1_jq7wg"]
+
+[node name="Flashlight" instance=ExtResource("1_jq7wg")]

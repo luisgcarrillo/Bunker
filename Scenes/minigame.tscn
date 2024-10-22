@@ -1,0 +1,127 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1yp87rurc8gb"]
+
+[ext_resource type="Script" path="res://Scripts/minigame_1.gd" id="1_jkl5a"]
+
+[sub_resource type="Curve2D" id="Curve2D_bnnec"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 65, 160, 0, 0, 0, 0, 234, 160)
+}
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_63ww1"]
+size = Vector2(4, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yi5be"]
+size = Vector2(4.1377, 30.5584)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0ditb"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_meb0s"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_citw4"]
+font_size = 12
+
+[node name="Minigame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Minigame1" type="Node2D" parent="."]
+script = ExtResource("1_jkl5a")
+
+[node name="Path2D" type="Path2D" parent="Minigame1"]
+curve = SubResource("Curve2D_bnnec")
+
+[node name="HitFollow" type="PathFollow2D" parent="Minigame1/Path2D"]
+position = Vector2(65, 160)
+
+[node name="HitArea" type="Area2D" parent="Minigame1/Path2D/HitFollow"]
+collision_layer = 16
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Minigame1/Path2D/HitFollow/HitArea"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_63ww1")
+
+[node name="ColorRect" type="ColorRect" parent="Minigame1/Path2D/HitFollow/HitArea"]
+offset_left = -2.0
+offset_top = -15.0
+offset_right = 44.0
+offset_bottom = 16.0
+scale = Vector2(0.0865636, 0.94839)
+color = Color(0.971086, 0.956232, 0.803478, 1)
+
+[node name="RepairFollow" type="PathFollow2D" parent="Minigame1/Path2D"]
+position = Vector2(65, 160)
+
+[node name="RepairArea" type="Area2D" parent="Minigame1/Path2D/RepairFollow"]
+z_index = -1
+scale = Vector2(1.93345, 1.31762)
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Minigame1/Path2D/RepairFollow/RepairArea"]
+position = Vector2(0, -0.100266)
+shape = SubResource("RectangleShape2D_yi5be")
+
+[node name="ColorRect" type="ColorRect" parent="Minigame1/Path2D/RepairFollow/RepairArea"]
+offset_left = -2.0
+offset_top = -15.0
+offset_right = 44.0
+offset_bottom = 17.0
+scale = Vector2(0.0865636, 0.94839)
+color = Color(0.206568, 0.479372, 0.181024, 1)
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="Container"]
+layout_mode = 2
+text = "PLACEHOLDER"
+label_settings = SubResource("LabelSettings_0ditb")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Container"]
+layout_mode = 2
+text = "Press Space with Correct Timing to Repair Generator"
+label_settings = SubResource("LabelSettings_meb0s")
+horizontal_alignment = 1
+
+[node name="RepairLabel" type="Label" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Repairs done: VarName / VarName2
+"
+label_settings = SubResource("LabelSettings_citw4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 140.0
+offset_right = 101.0
+offset_bottom = 180.0
+scale = Vector2(4.40741, 1)
+color = Color(0.239216, 0.239216, 0.239216, 0.513726)
+
+[connection signal="generatorMinigameDone" from="Minigame1" to="Minigame1" method="_on_generator_minigame_done"]
+[connection signal="area_entered" from="Minigame1/Path2D/RepairFollow/RepairArea" to="Minigame1" method="_on_repair_area_area_entered"]
+[connection signal="area_exited" from="Minigame1/Path2D/RepairFollow/RepairArea" to="Minigame1" method="_on_repair_area_area_exited"]

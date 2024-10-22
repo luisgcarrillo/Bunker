@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cb75b5g4vf8el"]
+
+[ext_resource type="PackedScene" uid="uid://vf2bl8ugelq2" path="res://Assets/simple_generatorfixed.glb" id="1_nmt2f"]
+[ext_resource type="Script" path="res://Scripts/generator.gd" id="2_03xuv"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ig3kn"]
+points = PackedVector3Array(10.8432, 17.7423, 11.8714, 11.1788, 15.2242, 7.82808, -6.97875, -17.9367, 12.0021, 10.8501, -17.7537, -11.9868, 10.8499, 17.7533, -11.9865, -6.96216, 17.8943, 11.9736, 10.8623, -17.7736, 11.8925, -7.77777, -17.3466, -11.9106, -6.96902, 17.9118, -12.0931, -11.8286, 7.51761, -4.38996, 11.4025, -12.7566, -0.885199, -11.1747, 1.63627, -1.41799, -6.96904, -17.9119, -12.0931, -11.2483, 8.09365, -7.86176, -7.77777, 17.3466, -11.9106, -10.6908, 10.9928, -7.47581, 11.1661, -10.8615, 7.8191, -7.2533, -16.722, 11.0063)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uh5er"]
+size = Vector3(40.17, 26.18, 46.485)
+
+[node name="Generator" instance=ExtResource("1_nmt2f")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+script = ExtResource("2_03xuv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 2.22045e-16, 1, 0, -1, 2.22045e-16, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_ig3kn")
+
+[node name="RepairArea" type="Area3D" parent="." index="2"]
+collision_layer = 128
+collision_mask = 64
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RepairArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.94646, 0)
+shape = SubResource("BoxShape3D_uh5er")
