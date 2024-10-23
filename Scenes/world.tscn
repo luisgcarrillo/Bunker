@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://4o6qg35mrxwd"]
+[gd_scene load_steps=29 format=4 uid="uid://4o6qg35mrxwd"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_drfg1"]
 [ext_resource type="PackedScene" uid="uid://b4cd3xrws17er" path="res://Scenes/player.tscn" id="1_jw5v3"]
@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://k52tqmw0i25l" path="res://Resources/gen2.tres" id="14_tlk2y"]
 [ext_resource type="Resource" uid="uid://bunkqm4uf6dn6" path="res://Resources/gen3.tres" id="15_blxy2"]
 [ext_resource type="Resource" uid="uid://dun4c827d7e4k" path="res://Resources/gen4.tres" id="16_422s0"]
+[ext_resource type="PackedScene" uid="uid://cloxbatjjvgwx" path="res://Scenes/bunkerdoor.tscn" id="18_moudl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k0qmf"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -296,27 +297,27 @@ path_height_offset = 0.25
 script = ExtResource("11_kn6v4")
 _generator_resources = Array[ExtResource("11_k3vrl")]([ExtResource("13_r3ks3"), ExtResource("14_tlk2y"), ExtResource("15_blxy2"), ExtResource("16_422s0")])
 
-[node name="Generator" parent="GeneratorManager" groups=["Generator"] instance=ExtResource("10_obpc4")]
+[node name="Generator1" parent="GeneratorManager" instance=ExtResource("10_obpc4")]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -38.6205, 1.62216, 24.7407)
 generatorData = ExtResource("13_r3ks3")
 
-[node name="Object_2" parent="GeneratorManager/Generator/Sketchfab_model/gen_obj_cleaner_materialmerger_gles" index="0"]
+[node name="Object_2" parent="GeneratorManager/Generator1/Sketchfab_model/gen_obj_cleaner_materialmerger_gles" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7073, 0, -7.67957)
 
-[node name="StaticBody3D" parent="GeneratorManager/Generator" index="1"]
+[node name="StaticBody3D" parent="GeneratorManager/Generator1" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9445, 0, 0)
 
-[node name="CollisionShape3D" parent="GeneratorManager/Generator/StaticBody3D" index="0"]
+[node name="CollisionShape3D" parent="GeneratorManager/Generator1/StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.22045e-16, 1, 0, -1, 2.22045e-16, 0, -6.7524, 0)
 
-[node name="RepairArea" parent="GeneratorManager/Generator" index="2"]
+[node name="RepairArea" parent="GeneratorManager/Generator1" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9445, 0, 0)
 collision_mask = 2
 
-[node name="CollisionShape3D" parent="GeneratorManager/Generator/RepairArea" index="0"]
+[node name="CollisionShape3D" parent="GeneratorManager/Generator1/RepairArea" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.63575, 0)
 
-[node name="UI" type="Control" parent="GeneratorManager/Generator"]
+[node name="UI" type="Control" parent="GeneratorManager/Generator1"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -325,7 +326,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="GeneratorManager/Generator/UI"]
+[node name="CenterContainer" type="CenterContainer" parent="GeneratorManager/Generator1/UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -333,7 +334,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BeginRepair" type="Label" parent="GeneratorManager/Generator/UI/CenterContainer"]
+[node name="BeginRepair" type="Label" parent="GeneratorManager/Generator1/UI/CenterContainer"]
 visible = false
 layout_mode = 2
 text = "Press \"E\" To Begin Repair"
@@ -343,12 +344,15 @@ vertical_alignment = 1
 
 [node name="Minigame" parent="." instance=ExtResource("11_ymp3c")]
 
-[connection signal="repairCheck" from="GeneratorManager/Generator" to="Player" method="_on_generator_repair_check"]
-[connection signal="repairDone" from="GeneratorManager/Generator" to="Minigame/Minigame1" method="_on_generator_repair_done"]
-[connection signal="repairExit" from="GeneratorManager/Generator" to="Player" method="_on_generator_repair_exit"]
-[connection signal="repairStart" from="GeneratorManager/Generator" to="Minigame/Minigame1" method="_on_generator_repair_start"]
-[connection signal="body_entered" from="GeneratorManager/Generator/RepairArea" to="GeneratorManager/Generator" method="_on_repair_area_body_entered"]
-[connection signal="body_exited" from="GeneratorManager/Generator/RepairArea" to="GeneratorManager/Generator" method="_on_repair_area_body_exited"]
+[node name="Door" parent="." instance=ExtResource("18_moudl")]
+transform = Transform3D(-7.43094e-08, 0, 1.7, 0, 1.7, 0, -1.7, 0, -7.43094e-08, 30.0076, 1.71577, 39)
+
+[connection signal="repairCheck" from="GeneratorManager/Generator1" to="Player" method="_on_generator_repair_check"]
+[connection signal="repairDone" from="GeneratorManager/Generator1" to="Minigame/Minigame1" method="_on_generator_repair_done"]
+[connection signal="repairExit" from="GeneratorManager/Generator1" to="Player" method="_on_generator_repair_exit"]
+[connection signal="repairStart" from="GeneratorManager/Generator1" to="Minigame/Minigame1" method="_on_generator_repair_start"]
+[connection signal="body_entered" from="GeneratorManager/Generator1/RepairArea" to="GeneratorManager/Generator1" method="_on_repair_area_body_entered"]
+[connection signal="body_exited" from="GeneratorManager/Generator1/RepairArea" to="GeneratorManager/Generator1" method="_on_repair_area_body_exited"]
 [connection signal="turnBeginRepairOff" from="Minigame/Minigame1" to="GeneratorManager" method="_on_minigame_1_turn_begin_repair_off"]
 
 [editable path="Player"]
@@ -361,5 +365,5 @@ vertical_alignment = 1
 [editable path="Lights/FlourescentLight10"]
 [editable path="Lights/FlourescentLight11"]
 [editable path="Zombie"]
-[editable path="GeneratorManager/Generator"]
+[editable path="GeneratorManager/Generator1"]
 [editable path="Minigame"]

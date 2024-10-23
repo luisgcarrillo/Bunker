@@ -19,5 +19,5 @@ func Initialize(_generator_resources: Array):
 		Generator.repairsNeeded = randi_range(3,5)
 
 
-func _on_minigame_1_turn_begin_repair_off():
-	begin_repair.visible = false
+#func _on_minigame_1_turn_begin_repair_off():
+	#begin_repair.visible = false

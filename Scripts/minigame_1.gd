@@ -52,6 +52,7 @@ func minigameReset():
 
 func _on_generator_repair_done():
 	minigame.visible = false
+	repairCount = 0
 
 
 func _on_generator_repair_start():

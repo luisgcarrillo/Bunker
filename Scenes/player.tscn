@@ -184,6 +184,7 @@ size = Vector3(1.59, 2.235, 2.645)
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER") groups=["Player"]]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+collision_mask = 257
 script = ExtResource("1_dg5yg")
 MOUSE_SENSITIVITY = 1.0
 CAMERA_CONTROLLER = NodePath("Camera3D")

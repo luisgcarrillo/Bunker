@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dmb3ktx0ifpvf"]
 
-[ext_resource type="PackedScene" uid="uid://dm18nftidwc8n" path="res://zombie.glb" id="1_lpmp8"]
+[ext_resource type="PackedScene" uid="uid://dm18nftidwc8n" path="res://Assets/zombie.glb" id="1_lpmp8"]
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="2_tvpro"]
 [ext_resource type="Texture2D" uid="uid://b276p3cco7m3m" path="res://Assets/Zombie/new_thin_zombie.png" id="3_aqfcg"]
 [ext_resource type="Script" path="res://Scripts/state_machine.gd" id="3_s41ad"]
@@ -9,7 +9,7 @@
 albedo_texture = ExtResource("3_aqfcg")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c4q2q"]
-size = Vector3(4, 7, 1)
+size = Vector3(3.5, 7, 1)
 
 [node name="zombie" instance=ExtResource("1_lpmp8")]
 script = ExtResource("2_tvpro")

@@ -9,7 +9,7 @@ points = PackedVector3Array(10.8432, 17.7423, 11.8714, 11.1788, 15.2242, 7.82808
 [sub_resource type="BoxShape3D" id="BoxShape3D_uh5er"]
 size = Vector3(40.17, 26.18, 46.485)
 
-[node name="Generator" instance=ExtResource("1_nmt2f")]
+[node name="Generator" groups=["Generator"] instance=ExtResource("1_nmt2f")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 script = ExtResource("2_03xuv")
 

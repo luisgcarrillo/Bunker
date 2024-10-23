@@ -13,7 +13,6 @@ signal repairExit
 
 @onready var begin_repair = $UI/CenterContainer/BeginRepair
 @onready var minigame = preload("res://Scenes/minigame.tscn")
-var currentGenNum: int
 var currentGenerator
 var canBeRepaired: bool = false
 var isRepaired: bool = false
@@ -22,7 +21,8 @@ var isRepaired: bool = false
 func _ready():
 	self.generatorData.repairsNeeded = randi_range(3,5)
 	#initialize()
-
+	
+	#print(generatorData.generatorNum)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -45,6 +45,9 @@ func beginRepair():
 func _on_repair_area_body_entered(body):
 	if body.is_in_group("Player"):
 		canBeRepaired = true
+		var currentGenNum = generatorData.generatorNum
+		var currentGenerator = generators[currentGenNum]
+		print(str(currentGenerator))
 		repairCheck.emit()
 		begin_repair.visible = true
 		#else:
@@ -62,7 +65,8 @@ func _on_repair_area_body_exited(body):
 
 func _on_minigame_1_generator_minigame_done():
 	canBeRepaired = false
-	generatorData.isRepaired = true
+	currentGenerator.isRepaired = true
+	print(str(currentGenerator.generatorData))
 	
 
 func _on_minigame_1_turn_begin_repair_off():
